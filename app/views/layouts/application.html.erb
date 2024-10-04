@@ -24,6 +24,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container my-4">
+      <% flash.each do |k, v| %>
+        <div class="alert alert-<%= { "alert" => "danger", "notice" => "success" }.fetch(k) %>" role="alert">
+          <%= v %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

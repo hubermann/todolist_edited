@@ -1,0 +1,9 @@
+<% content_for :title, "Todo lists" %>
+
+<h1>Todo lists</h1>
+
+<div class="my-3 list-group list-group-flush">
+  <%= render @todo_lists %>
+</div>
+
+<%= render "todo_lists/form", todo_list: TodoList.new %>

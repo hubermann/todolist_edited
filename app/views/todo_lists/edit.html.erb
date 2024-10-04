@@ -1,0 +1,7 @@
+<% content_for :title, "Editing todo list" %>
+
+<h1>Editing todo list</h1>
+
+<%= render "form", todo_list: @todo_list %>
+
+<%= link_to "Back to todo list", todo_list_path(@todo_list), class: "btn btn-secondary my-3" %>

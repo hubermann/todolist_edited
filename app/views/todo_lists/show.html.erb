@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-between align-items-center">
+  <h1><%= @todo_list.name %></h1>
+  <div>
+    <%= link_to "Edit", edit_todo_list_path(@todo_list), class: "btn btn-secondary" %>
+    <%= link_to "Delete", @todo_list, class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  </div>
+</div>
+
+<ul class="my-3 list-group list-group-flush">
+  <%= render @todo_list.todo_items %>
+</ul>
+
+<%= render "todo_items/form", todo_list: @todo_list, todo_item: @todo_list.todo_items.new %>
+
+<div class="d-flex justify-content-between py-3">
+  <%= link_to "Back to todo lists", root_path, class: "btn btn-secondary" %>
+  <%= link_to "Clear done items", clear_todo_list_path(@todo_list), class: "btn btn-danger", data: { turbo_method: :post, turbo_confirm: "Are you sure?" } %>
+</div>
