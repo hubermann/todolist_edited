@@ -3,7 +3,11 @@
 <h1>Todo lists</h1>
 
 <div class="my-3 list-group list-group-flush">
+  <% if @todo_lists.any? %>
   <%= render @todo_lists %>
+  <% else %>
+  <p class="text-muted">No todo lists found. Create one below!</p>
+  <% end %>
 </div>
 
 <%= render "todo_lists/form", todo_list: TodoList.new %>

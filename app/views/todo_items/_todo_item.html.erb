@@ -1,6 +1,6 @@
-<li class="list-group-item">
-  <%= form_with(model: [@todo_list, todo_item], namespace: dom_id(todo_item), data: { controller: "auto-submit" }) do |form| %>
-    <%= form.checkbox :done, class: "form-check-input me-1", data: { action: "auto-submit#autoSubmit" } %>
-    <%= form.label :done, todo_item.name, class: "form-check-label #{"text-black-50 text-decoration-line-through" if todo_item.done?}" %>
+<li id="<%= dom_id(todo_item) %>" class="list-group-item">
+  <%= form_with(model: [todo_item.todo_list, todo_item], method: :patch, data: { turbo_frame: "_top" }) do |form| %>
+    <%= form.check_box :done, checked: todo_item.done, data: { action: "change->todo-item#update" }, class: "form-check-input me-2" %>
+    <%= form.label :name, todo_item.name, class: "form-check-label #{'text-decoration-line-through' if todo_item.done?}" %>
   <% end %>
 </li>

@@ -12,4 +12,5 @@ RSpec.describe TodoItem, type: :model do
     todo_item = TodoItem.new(name: nil, todo_list: todo_list)
     expect(todo_item).not_to be_valid
   end
+  
 end

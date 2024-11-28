@@ -1,5 +1,6 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: %i[ show edit update destroy clear ]
+  before_action :set_todo_list, only: %i[show edit update destroy clear]
+  skip_before_action :verify_authenticity_token, only: [:create, :update]
 
   def index
     @todo_lists = TodoList.all
@@ -13,18 +14,14 @@ class TodoListsController < ApplicationController
 
   def create
     @todo_list = TodoList.new(todo_list_params)
-
-    respond_to do |format|
-      if @todo_list.save
-        format.html { redirect_to root_path, notice: "Todo list was successfully created." }
-      else
-        format.html do
-          flash.now.alert = "Failed to create todo list."
-          render :new, status: :unprocessable_entity
-        end
-      end
+    if @todo_list.save
+      redirect_to root_path, notice: "Todo list was successfully created."
+    else
+      flash.now[:alert] = "Failed to create todo list."
+      render :new, status: :unprocessable_entity
     end
   end
+
 
   def update
     respond_to do |format|
@@ -55,10 +52,10 @@ class TodoListsController < ApplicationController
   private
 
     def set_todo_list
-      @todo_list = TodoList.find(params.expect(:id))
+      @todo_list = TodoList.find(params[:id])
     end
 
     def todo_list_params
-      params.expect(todo_list: [ :name ])
+      params.require(:todo_list).permit(:name)
     end
 end

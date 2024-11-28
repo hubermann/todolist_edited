@@ -18,4 +18,6 @@ RSpec.describe TodoList, type: :model do
 
     expect { todo_list.destroy }.to change { TodoItem.count }.from(2).to(0)
   end
+
+  
 end
